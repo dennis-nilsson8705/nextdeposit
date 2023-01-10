@@ -10,11 +10,11 @@ export default function Home() {
       <Head>
         <title>Next Deposit</title>
         <meta name="description" content="Next deposit app" />
-        {/* <meta name="viewport" content="width=device-width, initial-scale=1" /> */}
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <main className="flex flex-1 flex-col items-center p-24 min-h-screen">
+        <h1 className="text-3xl font-bold text-cyan-700">Next Deposit</h1>
       </main>
     </>
   );
