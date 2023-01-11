@@ -2,15 +2,15 @@ import { TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCurrentAmount } from '../redux/depositSlice';
-import store from '../redux/store';
 
 const DepositInput = () => {
   const [amount, setAmount] = useState(0);
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    setAmount(e);
-    dispatch(setCurrentAmount(e));
+  const handleChange = (e: string | React.SetStateAction<number>) => {
+    const convertedInput = parseInt(e.toString());
+    setAmount(convertedInput);
+    dispatch(setCurrentAmount(convertedInput));
   };
 
   return (

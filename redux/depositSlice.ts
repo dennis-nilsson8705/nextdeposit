@@ -1,6 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { AppRootState } from './rootReducer';
 
 type depositState = {
   totalAmount: number;
@@ -17,15 +16,16 @@ export const depositSlice = createSlice({
   initialState,
   reducers: {
     setDepositAmount: (state, action: PayloadAction<number>) => {
-      const newVal = parseInt((state.totalAmount + action.payload).toString());
-      state.totalAmount = newVal;
+      state.totalAmount = state.totalAmount + action.payload;
     },
     setCurrentAmount: (state, action: PayloadAction<number>) => {
       state.currentAmount = action.payload;
-    }
+    },
+    depositSaveSuccess: () => {}
   }
 });
 
-export const { setDepositAmount, setCurrentAmount } = depositSlice.actions;
+export const { setDepositAmount, setCurrentAmount, depositSaveSuccess } =
+  depositSlice.actions;
 
 export default depositSlice.reducer;

@@ -11,9 +11,6 @@ const DepositButton = () => {
   function handleClick() {
     const currentState = store.getState();
     const amount = currentState.deposits.currentAmount;
-    // console.log(currentState.deposits.currentAmount);
-
-    // console.log(currentState.deposits.totalAmount);
 
     dispatch(setDepositAmount(amount));
 
