@@ -1,21 +1,38 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setTotalDepositAmount } from '../redux/depositSlice';
+import { setDepositAmount } from '../redux/depositSlice';
 import store from '../redux/store';
 
 const DepositButton = () => {
   const [title, setTitle] = useState('Submit');
+  const [isEnabled, setIsEnabled] = useState(false);
   const dispatch = useDispatch();
+
   function handleClick() {
     const currentState = store.getState();
-    const addTodo = dispatch(setTotalDepositAmount(3));
-    title === 'Submit' && setTitle('Success');
+    const amount = currentState.deposits.currentAmount;
+    // console.log(currentState.deposits.currentAmount);
+
+    // console.log(currentState.deposits.totalAmount);
+
+    dispatch(setDepositAmount(amount));
+
+    if (title === 'Submit') {
+      setTitle('Success');
+      setIsEnabled(true);
+    } else {
+      setTitle('Submit');
+      setIsEnabled(false);
+    }
   }
+
   return (
     <button
-      className="pt-4 pb-4 pl-4 pr-4 font-bold text-white bg-gray-600 rounded hover:bg-blue-700"
-      onClick={handleClick}
-      // disabled={title === 'Success'}
+      className="pt-4 pb-4 pl-4 pr-4 font-bold text-white rounded bg-cyan-700 hover:bg-gray-700"
+      onClick={() => {
+        handleClick();
+      }}
+      disabled={isEnabled}
     >
       {title}
     </button>
