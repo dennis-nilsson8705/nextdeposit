@@ -1,10 +1,10 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
-const DepositResult = () => {
+export const DepositResult = () => {
   return (
     <TextField
-      disabled={true}
+      disabled={false}
       fullWidth
       multiline={true}
       InputProps={{

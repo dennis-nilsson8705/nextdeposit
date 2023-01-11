@@ -1,3 +1,4 @@
+import { SetStateAction, useState } from 'react';
 import DepositButton from './depositbutton';
 import DepositInput from './depositInput';
 import DepositResult from './depositResult';
