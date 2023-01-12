@@ -5,7 +5,6 @@ import store from '../redux/store';
 
 export const DepositResult = () => {
   const totalAmount = useSelector(() => store.getState().deposits.totalAmount);
-
   return (
     <TextField
       disabled={false}

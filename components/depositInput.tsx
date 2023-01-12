@@ -7,10 +7,15 @@ const DepositInput = () => {
   const [amount, setAmount] = useState(0);
   const dispatch = useDispatch();
 
+  const allowOnlyNumber = (value: string) => {
+    return value.replace(/[^0-9]/g, '');
+  };
+
   const handleChange = (e: string | React.SetStateAction<number>) => {
-    const convertedInput = parseInt(e.toString());
-    setAmount(convertedInput);
-    dispatch(setCurrentAmount(convertedInput));
+    const sanitizedValue = allowOnlyNumber(e.toString());
+    const newAmount = parseInt(sanitizedValue);
+    setAmount(newAmount);
+    dispatch(setCurrentAmount(newAmount));
   };
 
   return (
@@ -19,6 +24,7 @@ const DepositInput = () => {
       onChange={(e) => {
         handleChange(e.target.value);
       }}
+      value={amount}
     ></TextField>
   );
 };
