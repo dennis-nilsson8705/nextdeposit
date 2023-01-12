@@ -11,12 +11,16 @@ const initialState: depositState = {
   currentAmount: 0
 };
 
+export type addActionPayload = {
+  amount: number;
+};
+
 export const depositSlice = createSlice({
   name: 'deposit',
   initialState,
   reducers: {
-    setDepositAmount: (state, action: PayloadAction<number>) => {
-      state.totalAmount = state.totalAmount + action.payload;
+    setDepositAmount: (state, action: PayloadAction<addActionPayload>) => {
+      state.totalAmount = state.totalAmount + action.payload.amount;
     },
     setCurrentAmount: (state, action: PayloadAction<number>) => {
       state.currentAmount = action.payload;
