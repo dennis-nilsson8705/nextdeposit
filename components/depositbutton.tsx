@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addActionPayload, setDepositAmount } from '../redux/depositSlice';
+import {
+  addActionPayload,
+  resetDepositInput,
+  setDepositAmount
+} from '../redux/depositSlice';
 import store from '../redux/store';
 
 const DepositButton = () => {
@@ -10,12 +14,13 @@ const DepositButton = () => {
   function handleClick() {
     const currentState = store.getState();
     const amount = currentState.deposits.currentDeposit.amount;
-    dispatch(setDepositAmount({ amount } as addActionPayload));
 
     if (title === 'Submit') {
+      dispatch(setDepositAmount({ amount } as addActionPayload));
       setTitle('Success! Click again');
     } else {
       setTitle('Submit');
+      dispatch(resetDepositInput());
     }
   }
 

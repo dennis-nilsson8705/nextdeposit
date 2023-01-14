@@ -7,17 +7,19 @@ import DepositTotals from './depositTotals';
 import withCharacter from './wrapper';
 
 export const DepositContainer = () => {
-  const totalAmount = useSelector(
-    () => store.getState().deposits.totalDeposit.amount
+  const totalAmount = useSelector(() => store.getState().deposits.showResult);
+  const currentDeposit = useSelector(
+    () => store.getState().deposits.currentDeposit.amount
   );
-  const showResult = totalAmount > 0;
+
+  const showResult = totalAmount;
   return (
     <div className="flex flex-row ">
       <div className="flex flex-col gap-4 p-20 space-x-4 ">
         <div className="flex flex-1 flex-grow-0 pl-4 ">
           Please enter your deposit below
         </div>
-        {withCharacter(DepositInput)}
+        {<DepositInput value={currentDeposit} />}
         {withCharacter(DepositButton)}
         {showResult && (
           <div className="flex flex-1 flex-grow-0 ">

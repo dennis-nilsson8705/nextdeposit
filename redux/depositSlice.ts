@@ -9,6 +9,8 @@ type deposit = {
 type depositState = {
   totalDeposit: deposit;
   currentDeposit: deposit;
+  shouldReset?: boolean;
+  showResult?: boolean;
 };
 
 const initialState: depositState = {
@@ -43,11 +45,29 @@ export const depositSlice = createSlice({
         currency: state.totalDeposit.currency
       };
     },
-    depositSaveSuccess: () => {}
+    depositSaveSuccess: (state) => {
+      state.showResult = true;
+    },
+    resetDepositInput: (state) => {
+      state.currentDeposit = {
+        amount: 0,
+        currency: state.totalDeposit.currency
+      };
+      state.shouldReset = true;
+      state.showResult = false;
+    },
+    depositResetSuccess: (state) => {
+      state.shouldReset = false;
+    }
   }
 });
 
-export const { setDepositAmount, setCurrentAmount, depositSaveSuccess } =
-  depositSlice.actions;
+export const {
+  setDepositAmount,
+  setCurrentAmount,
+  depositSaveSuccess,
+  resetDepositInput,
+  depositResetSuccess
+} = depositSlice.actions;
 
 export default depositSlice.reducer;
