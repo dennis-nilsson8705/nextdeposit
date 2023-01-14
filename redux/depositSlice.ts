@@ -1,14 +1,25 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
+type deposit = {
+  amount: number;
+  currency: string;
+};
+
 type depositState = {
-  totalAmount: number;
-  currentAmount: number;
+  totalDeposit: deposit;
+  currentDeposit: deposit;
 };
 
 const initialState: depositState = {
-  totalAmount: 0,
-  currentAmount: 0
+  totalDeposit: {
+    amount: 0,
+    currency: 'NZD'
+  },
+  currentDeposit: {
+    amount: 0,
+    currency: 'NZD'
+  }
 };
 
 export type addActionPayload = {
@@ -20,10 +31,17 @@ export const depositSlice = createSlice({
   initialState,
   reducers: {
     setDepositAmount: (state, action: PayloadAction<addActionPayload>) => {
-      state.totalAmount = state.totalAmount + action.payload.amount;
+      state.totalDeposit = {
+        amount: (state.totalDeposit.amount =
+          state.totalDeposit.amount + action.payload.amount),
+        currency: state.totalDeposit.currency
+      };
     },
     setCurrentAmount: (state, action: PayloadAction<number>) => {
-      state.currentAmount = action.payload;
+      state.currentDeposit = {
+        amount: action.payload,
+        currency: state.totalDeposit.currency
+      };
     },
     depositSaveSuccess: () => {}
   }

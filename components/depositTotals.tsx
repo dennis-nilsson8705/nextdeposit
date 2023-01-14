@@ -3,9 +3,9 @@ import TextField from '@material-ui/core/TextField';
 import { useSelector } from 'react-redux';
 import store from '../redux/store';
 
-export const DepositResult = () => {
+export const DepositTotals = () => {
   const totalAmount = useSelector(
-    () => store.getState().deposits.currentDeposit.amount
+    () => store.getState().deposits.totalDeposit.amount
   );
   return (
     <TextField
@@ -15,9 +15,9 @@ export const DepositResult = () => {
       InputProps={{
         disableUnderline: true
       }}
-      value={`You have submitted a deposit of ${totalAmount} NZD`}
+      value={`Your total is ${totalAmount} NZD`}
     ></TextField>
   );
 };
 
-export default DepositResult;
+export default DepositTotals;

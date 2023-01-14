@@ -27,7 +27,6 @@ export default function App({ Component, pageProps }: AppProps) {
             </div>
             <div className="flex flex-row justify-center ">
               <DepositContainer />
-              <DepositContainer />
             </div>
           </div>
         </Provider>

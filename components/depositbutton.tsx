@@ -5,20 +5,17 @@ import store from '../redux/store';
 
 const DepositButton = () => {
   const [title, setTitle] = useState('Submit');
-  const [isEnabled, setIsEnabled] = useState(false);
   const dispatch = useDispatch();
 
   function handleClick() {
     const currentState = store.getState();
-    const amount = currentState.deposits.currentAmount;
+    const amount = currentState.deposits.currentDeposit.amount;
     dispatch(setDepositAmount({ amount } as addActionPayload));
 
     if (title === 'Submit') {
-      setTitle('Success');
-      setIsEnabled(true);
+      setTitle('Success! Click again');
     } else {
       setTitle('Submit');
-      setIsEnabled(false);
     }
   }
 
@@ -28,7 +25,6 @@ const DepositButton = () => {
       onClick={() => {
         handleClick();
       }}
-      disabled={isEnabled}
     >
       {title}
     </button>
