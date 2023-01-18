@@ -16,7 +16,7 @@ const DepositButton = () => {
     const amount = currentState.deposits.currentDeposit.amount;
     const currentUserKey = currentState.deposits.currentUserKey ?? 0;
 
-    if (title === 'Submit') {
+    if (title === 'Submit' && amount > 0) {
       dispatch(
         setDepositAmount({ amount, currentUserKey } as addActionPayload)
       );

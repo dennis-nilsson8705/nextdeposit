@@ -31,7 +31,8 @@ const DepositInput = ({ value, shouldReset }: DepositInputProps) => {
 
   return (
     <TextField
-      className="pt-4 pb-4 pl-4 pr-4 font-bold bg max-w-5"
+      required
+      className="pt-4 pb-4 pl-4 pr-4 font-bold border bg max-w-5"
       onChange={(e) => {
         handleChange(e.target.value);
       }}

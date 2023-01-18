@@ -1,3 +1,4 @@
+import { type } from 'os';
 import { useSelector } from 'react-redux';
 import store from '../redux/store';
 import DepositButton from './depositbutton';
@@ -12,27 +13,41 @@ export const DepositContainer = () => {
   const currentDeposit = useSelector(
     () => store.getState().deposits.currentDeposit.amount
   );
-  const currentUserKey = useSelector(
-    () => store.getState().deposits.currentUserKey
-  );
+  const currentUserKey =
+    useSelector(() => store.getState().deposits.currentUserKey) ?? 0;
   const shouldReset = useSelector(() => store.getState().deposits.shouldReset);
 
   const showResult = totalAmount;
+
   return (
     <div className="flex flex-row ">
       <div className="flex flex-col gap-4 p-20 space-x-4 ">
         <div className="flex flex-1 flex-grow-0 pl-4 ">
           Please enter your user id below
         </div>
-        {<DepositUserInput value={currentUserKey ?? 0} />}
+        <div className="flex flex-row peer">
+          <DepositUserInput value={currentUserKey} />
+          {currentUserKey < 1 && (
+            <p className="font-light text-red-700 peer-invalid:visible">*</p>
+          )}
+        </div>
         <div className="flex flex-1 flex-grow-0 ">
           Please enter your deposit below
         </div>
         {
-          <DepositInput
-            value={currentDeposit}
-            shouldReset={shouldReset ?? false}
-          />
+          <>
+            <div className="flex flex-row peer">
+              <DepositInput
+                value={currentDeposit}
+                shouldReset={shouldReset ?? false}
+              />
+              {currentDeposit === 0 && (
+                <p className="font-light text-red-700 peer-invalid:visible">
+                  *
+                </p>
+              )}
+            </div>
+          </>
         }
         {withCharacter(DepositButton)}
         {showResult && (
