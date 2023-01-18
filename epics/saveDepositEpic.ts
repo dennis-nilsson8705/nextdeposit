@@ -10,7 +10,7 @@ export const saveDepositEpic = (action$: any, state$: any) => {
   return action$.pipe(
     ofType(setDepositAmount),
     mergeMap(async (action: any) => {
-      const added = await addDeposit(action.payload.currentUserKey, {
+      await addDeposit(action.payload.currentUserKey, {
         id: v4(),
         amount: action.payload.amount
       });
