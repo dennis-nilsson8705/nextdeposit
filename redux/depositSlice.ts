@@ -11,6 +11,7 @@ type depositState = {
   currentDeposit: deposit;
   shouldReset?: boolean;
   showResult?: boolean;
+  currentUserKey?: number;
 };
 
 const initialState: depositState = {
@@ -21,11 +22,16 @@ const initialState: depositState = {
   currentDeposit: {
     amount: 0,
     currency: 'NZD'
-  }
+  },
+  currentUserKey: 0
 };
 
 export type addActionPayload = {
   amount: number;
+};
+
+export type setCurrentUserPayload = {
+  currentUserKey: number;
 };
 
 export const depositSlice = createSlice({
@@ -58,6 +64,9 @@ export const depositSlice = createSlice({
     },
     depositResetSuccess: (state) => {
       state.shouldReset = false;
+    },
+    saveCurrentUser: (state, action: PayloadAction<setCurrentUserPayload>) => {
+      state.currentUserKey = action.payload.currentUserKey;
     }
   }
 });
@@ -67,7 +76,8 @@ export const {
   setCurrentAmount,
   depositSaveSuccess,
   resetDepositInput,
-  depositResetSuccess
+  depositResetSuccess,
+  saveCurrentUser
 } = depositSlice.actions;
 
 export default depositSlice.reducer;

@@ -12,6 +12,7 @@ export const saveDepositEpic = (action$: any, state$: any) => {
         id: uuid(),
         amount: action.payload.amount
       });
+      //get total amount for this user and pass to depositSaveSuccess and update state
       return of(depositSaveSuccess());
     })
   );
