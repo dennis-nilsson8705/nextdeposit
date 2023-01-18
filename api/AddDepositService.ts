@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const config = {
-  baseUrl: 'http://localhost:80/Deposit',
+  baseUrl: process.env.NEXT_PUBLIC_SERVICE_URL,
   headers: {
     'Content-Type': 'application/json'
   },
