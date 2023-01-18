@@ -1,4 +1,3 @@
-import { type } from 'os';
 import { useSelector } from 'react-redux';
 import store from '../redux/store';
 import DepositButton from './depositbutton';
