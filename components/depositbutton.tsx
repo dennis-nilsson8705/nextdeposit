@@ -14,13 +14,16 @@ const DepositButton = () => {
   function handleClick() {
     const currentState = store.getState();
     const amount = currentState.deposits.currentDeposit.amount;
+    const currentUserKey = currentState.deposits.currentUserKey ?? 0;
 
     if (title === 'Submit') {
-      dispatch(setDepositAmount({ amount } as addActionPayload));
+      dispatch(
+        setDepositAmount({ amount, currentUserKey } as addActionPayload)
+      );
       setTitle('Success! Click again');
     } else {
-      setTitle('Submit');
       dispatch(resetDepositInput());
+      setTitle('Submit');
     }
   }
 

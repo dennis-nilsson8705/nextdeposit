@@ -3,7 +3,11 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { saveCurrentUser, setCurrentUserPayload } from '../redux/depositSlice';
 
-const DepositUserInput = () => {
+export type DepositUserInputProps = {
+  value: number;
+};
+
+const DepositUserInput = ({ value }: DepositUserInputProps) => {
   const [currentUser, setCurrentUser] = useState(0);
   const dispatch = useDispatch();
 
@@ -21,6 +25,7 @@ const DepositUserInput = () => {
         onChange={(e) => {
           handleChange(e.target.value);
         }}
+        value={value}
       ></TextField>
     </div>
   );

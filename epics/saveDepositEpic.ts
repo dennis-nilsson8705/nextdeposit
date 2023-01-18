@@ -2,18 +2,23 @@ import { mergeMap, of } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { depositSaveSuccess, setDepositAmount } from '../redux/depositSlice';
 import { addDeposit } from '../api/AddDepositService';
-import { uuid } from 'uuidv4';
+import { getDepositByUserKey } from '../api/QueryDepositService';
+
+import { v4 } from 'uuid';
 
 export const saveDepositEpic = (action$: any, state$: any) => {
   return action$.pipe(
     ofType(setDepositAmount),
-    mergeMap((action: any) => {
-      addDeposit('http://localhost:5420/Deposit', {
-        id: uuid(),
+    mergeMap(async (action: any) => {
+      const added = await addDeposit(action.payload.currentUserKey, {
+        id: v4(),
         amount: action.payload.amount
       });
-      //get total amount for this user and pass to depositSaveSuccess and update state
-      return of(depositSaveSuccess());
+
+      const userTotal = await getDepositByUserKey(
+        action.payload.currentUserKey
+      );
+      return depositSaveSuccess({ amount: userTotal.data });
     })
   );
 };

@@ -6,11 +6,11 @@ import store from '../redux/store';
 
 export type DepositInputProps = {
   value: number;
+  shouldReset: boolean;
 };
 
-const DepositInput = ({ value }: DepositInputProps) => {
+const DepositInput = ({ value, shouldReset }: DepositInputProps) => {
   const [amount, setAmount] = useState(0);
-  const currentState = store.getState();
   const dispatch = useDispatch();
 
   const allowOnlyNumber = (value: string) => {
@@ -18,16 +18,16 @@ const DepositInput = ({ value }: DepositInputProps) => {
   };
 
   const handleChange = (e: string | React.SetStateAction<number>) => {
+    if (shouldReset === true) {
+      setAmount(0);
+      dispatch(depositResetSuccess());
+    }
+
     const sanitizedValue = allowOnlyNumber(e.toString());
     const newAmount = parseInt(sanitizedValue);
     setAmount(newAmount);
     dispatch(setCurrentAmount(newAmount));
   };
-
-  if (currentState.deposits.shouldReset === true) {
-    setAmount(0);
-    dispatch(depositResetSuccess());
-  }
 
   return (
     <TextField

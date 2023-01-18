@@ -14,6 +14,10 @@ type depositState = {
   currentUserKey?: number;
 };
 
+type depositSaveSuccessPayload = {
+  amount: number;
+};
+
 const initialState: depositState = {
   totalDeposit: {
     amount: 0,
@@ -28,6 +32,7 @@ const initialState: depositState = {
 
 export type addActionPayload = {
   amount: number;
+  currentUserKey: number;
 };
 
 export type setCurrentUserPayload = {
@@ -51,8 +56,15 @@ export const depositSlice = createSlice({
         currency: state.totalDeposit.currency
       };
     },
-    depositSaveSuccess: (state) => {
+    depositSaveSuccess: (
+      state,
+      action: PayloadAction<depositSaveSuccessPayload>
+    ) => {
       state.showResult = true;
+      state.totalDeposit = {
+        ...state.totalDeposit,
+        amount: action.payload.amount
+      };
     },
     resetDepositInput: (state) => {
       state.currentDeposit = {

@@ -12,6 +12,10 @@ export const DepositContainer = () => {
   const currentDeposit = useSelector(
     () => store.getState().deposits.currentDeposit.amount
   );
+  const currentUserKey = useSelector(
+    () => store.getState().deposits.currentUserKey
+  );
+  const shouldReset = useSelector(() => store.getState().deposits.shouldReset);
 
   const showResult = totalAmount;
   return (
@@ -20,11 +24,16 @@ export const DepositContainer = () => {
         <div className="flex flex-1 flex-grow-0 pl-4 ">
           Please enter your user id below
         </div>
-        {<DepositUserInput />}
+        {<DepositUserInput value={currentUserKey ?? 0} />}
         <div className="flex flex-1 flex-grow-0 ">
           Please enter your deposit below
         </div>
-        {<DepositInput value={currentDeposit} />}
+        {
+          <DepositInput
+            value={currentDeposit}
+            shouldReset={shouldReset ?? false}
+          />
+        }
         {withCharacter(DepositButton)}
         {showResult && (
           <div className="flex flex-1 flex-grow-0 ">

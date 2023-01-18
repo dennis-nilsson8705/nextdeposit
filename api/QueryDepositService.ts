@@ -5,24 +5,16 @@ const config = {
   headers: {
     'Content-Type': 'application/json'
   },
-  method: 'post'
+
+  method: 'get'
 };
 
-type addDepositBody = {
-  id: string;
-  amount: number;
-  isCrypto?: boolean;
-  currency?: string;
-};
-
-export const addDeposit = async (
-  currentUserKey: number,
-  data: addDepositBody
+export const getDepositByUserKey = async (
+  currentUserKey: number
 ): Promise<any> => {
   return await axios({
     ...config,
-    url: `${config.baseUrl}/${currentUserKey}`,
-    data
+    url: `${config.baseUrl}/total/${currentUserKey}`
   })
     .then((response) => {
       return {
