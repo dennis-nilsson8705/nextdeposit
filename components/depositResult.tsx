@@ -1,16 +1,14 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { useSelector } from 'react-redux';
-import store from '../redux/store';
 import { Fade } from '@material-ui/core';
 
-export const DepositResult = () => {
-  const totalAmount = useSelector(
-    () => store.getState().deposits.currentDeposit.amount
-  );
+type DepositResultProps = {
+  submittedAmount: number;
+};
 
+export const DepositResult = ({ submittedAmount }: DepositResultProps) => {
   return (
-    <Fade in={true}>
+    <Fade in={true} timeout={1000}>
       <TextField
         disabled={false}
         fullWidth
@@ -18,7 +16,7 @@ export const DepositResult = () => {
         InputProps={{
           disableUnderline: true
         }}
-        value={`You have submitted a deposit of ${totalAmount} NZD`}
+        value={`You have submitted a deposit of ${submittedAmount} NZD`}
       ></TextField>
     </Fade>
   );

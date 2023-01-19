@@ -1,12 +1,11 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { useSelector } from 'react-redux';
-import store from '../redux/store';
 
-export const DepositTotals = () => {
-  const totalAmount = useSelector(
-    () => store.getState().deposits.totalDeposit.amount
-  );
+export type DepositTotalsProps = {
+  totalAmount: number;
+};
+
+export const DepositTotals = ({ totalAmount }: DepositTotalsProps) => {
   return (
     <TextField
       disabled={false}

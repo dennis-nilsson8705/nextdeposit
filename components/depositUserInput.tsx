@@ -1,23 +1,15 @@
 import { TextField } from '@material-ui/core';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { saveCurrentUser, setCurrentUserPayload } from '../redux/depositSlice';
+import React from 'react';
 
 export type DepositUserInputProps = {
-  value: number;
+  currentUserKey: number;
+  handleChange: (e: string) => void;
 };
 
-const DepositUserInput = ({ value }: DepositUserInputProps) => {
-  const [currentUser, setCurrentUser] = useState(0);
-  const dispatch = useDispatch();
-
-  const handleChange = (e: string) => {
-    const userKey = parseInt(e);
-    setCurrentUser(userKey);
-    dispatch(
-      saveCurrentUser({ currentUserKey: userKey } as setCurrentUserPayload)
-    );
-  };
+const DepositUserInput = ({
+  currentUserKey,
+  handleChange
+}: DepositUserInputProps) => {
   return (
     <div className="flex flex-col">
       <TextField
@@ -25,7 +17,7 @@ const DepositUserInput = ({ value }: DepositUserInputProps) => {
         onChange={(e) => {
           handleChange(e.target.value);
         }}
-        value={value}
+        value={currentUserKey}
       ></TextField>
     </div>
   );
