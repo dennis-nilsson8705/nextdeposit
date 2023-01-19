@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import store from '../redux/store';
 import DepositButton from './depositbutton';
+import DepositButtonContainer from './depositButtonContainer';
 import DepositInput from './depositInput';
 import DepositResult from './depositResult';
 import DepositTotals from './depositTotals';
@@ -48,7 +49,8 @@ export const DepositContainer = () => {
             </div>
           </>
         }
-        {withCharacter(DepositButton)}
+        {/* {withCharacter(DepositButton)} */}
+        <DepositButtonContainer />
         {showResult && (
           <div className="flex flex-1 flex-grow-0 ">
             <DepositResult />
