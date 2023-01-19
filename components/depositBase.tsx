@@ -6,7 +6,7 @@ import DepositResultContainer from './depositResultContainer';
 import DepositTotalsContainer from './depositTotalsContainer';
 import DepositUserInputContainer from './depositUserInputContainer';
 
-export const DepositContainer = () => {
+export const DepositBase = () => {
   const stateDeposits = useSelector(() => store.getState().deposits);
   const showResult = stateDeposits.showResult;
   const currentDeposit = stateDeposits.currentDeposit.amount;
@@ -64,4 +64,4 @@ export const DepositContainer = () => {
   );
 };
 
-export default DepositContainer;
+export default DepositBase;

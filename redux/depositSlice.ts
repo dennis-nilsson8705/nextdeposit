@@ -1,9 +1,18 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
+export type addActionPayload = {
+  amount: number;
+  currentUserKey: number;
+};
+
 type deposit = {
   amount: number;
   currency: string;
+};
+
+type depositSaveSuccessPayload = {
+  amount: number;
 };
 
 type depositState = {
@@ -14,8 +23,8 @@ type depositState = {
   currentUserKey?: number;
 };
 
-type depositSaveSuccessPayload = {
-  amount: number;
+export type setCurrentUserPayload = {
+  currentUserKey: number;
 };
 
 const initialState: depositState = {
@@ -30,31 +39,12 @@ const initialState: depositState = {
   currentUserKey: 0
 };
 
-export type addActionPayload = {
-  amount: number;
-  currentUserKey: number;
-};
-
-export type setCurrentUserPayload = {
-  currentUserKey: number;
-};
-
 export const depositSlice = createSlice({
   name: 'deposit',
   initialState,
   reducers: {
-    setDepositAmount: (state, action: PayloadAction<addActionPayload>) => {
-      state.totalDeposit = {
-        amount: (state.totalDeposit.amount =
-          state.totalDeposit.amount + action.payload.amount),
-        currency: state.totalDeposit.currency
-      };
-    },
-    setCurrentAmount: (state, action: PayloadAction<number>) => {
-      state.currentDeposit = {
-        amount: action.payload,
-        currency: state.totalDeposit.currency
-      };
+    depositResetSuccess: (state) => {
+      state.shouldReset = false;
     },
     depositSaveSuccess: (
       state,
@@ -74,22 +64,32 @@ export const depositSlice = createSlice({
       state.shouldReset = true;
       state.showResult = false;
     },
-    depositResetSuccess: (state) => {
-      state.shouldReset = false;
-    },
     saveCurrentUser: (state, action: PayloadAction<setCurrentUserPayload>) => {
       state.currentUserKey = action.payload.currentUserKey;
+    },
+    setCurrentAmount: (state, action: PayloadAction<number>) => {
+      state.currentDeposit = {
+        amount: action.payload,
+        currency: state.totalDeposit.currency
+      };
+    },
+    setDepositAmount: (state, action: PayloadAction<addActionPayload>) => {
+      state.totalDeposit = {
+        amount: (state.totalDeposit.amount =
+          state.totalDeposit.amount + action.payload.amount),
+        currency: state.totalDeposit.currency
+      };
     }
   }
 });
 
 export const {
-  setDepositAmount,
-  setCurrentAmount,
+  depositResetSuccess,
   depositSaveSuccess,
   resetDepositInput,
-  depositResetSuccess,
-  saveCurrentUser
+  saveCurrentUser,
+  setCurrentAmount,
+  setDepositAmount
 } = depositSlice.actions;
 
 export default depositSlice.reducer;

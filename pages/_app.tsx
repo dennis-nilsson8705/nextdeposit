@@ -2,7 +2,7 @@ import Head from 'next/head';
 import '../styles/globals.css';
 import 'tailwindcss/tailwind.css';
 import type { AppProps } from 'next/app';
-import DepositContainer from '../components/depositContainer';
+import { DepositBase } from '../components/depositBase';
 import React from 'react';
 import { Provider } from 'react-redux';
 import AppReduxStore from '../redux/store';
@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
               Next Deposit
             </div>
             <div className="flex flex-row justify-center ">
-              <DepositContainer />
+              <DepositBase />
             </div>
           </div>
         </Provider>
